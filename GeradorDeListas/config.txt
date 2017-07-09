@@ -1,0 +1,4 @@
+com.mysql.jdbc.Driver
+jdbc:mysql://localhost:3306/BancoDeQuestoes?useSSL=false
+//aqui o seu user do mysql
+//aqui a sua senha do mysql
