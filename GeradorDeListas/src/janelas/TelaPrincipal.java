@@ -5,6 +5,8 @@
  */
 package janelas;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author carlosrorato
@@ -65,6 +67,11 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jMenu4.setText("Help");
 
         jMenuItem4.setText("Sobre");
+        jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem4ActionPerformed(evt);
+            }
+        });
         jMenu4.add(jMenuItem4);
 
         jMenuBar1.add(jMenu4);
@@ -84,6 +91,10 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
+        JOptionPane.showMessageDialog(this, "Gerador de Provas e Listas\n\nDesenvolvido por Carlos Henrique Rorato Souza\n\nUso vetado para fins comerciais\nContato: carlosrorato@hotmail.com\n2017");
+    }//GEN-LAST:event_jMenuItem4ActionPerformed
 
     /**
      * @param args the command line arguments
