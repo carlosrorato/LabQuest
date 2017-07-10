@@ -5,6 +5,7 @@
  */
 package janelas;
 
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableRowSorter;
 import model.bean.Questao;
@@ -21,9 +22,9 @@ public class GerenciarQuestoes extends javax.swing.JFrame {
      */
     public GerenciarQuestoes() {
         initComponents();
-         DefaultTableModel modelo = (DefaultTableModel) Tabela.getModel();
+        DefaultTableModel modelo = (DefaultTableModel) Tabela.getModel();
         Tabela.setRowSorter(new TableRowSorter(modelo));
-        
+
         readJTable();
     }
 
@@ -88,8 +89,18 @@ public class GerenciarQuestoes extends javax.swing.JFrame {
         });
 
         btnAtualizar.setText("Atualizar");
+        btnAtualizar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAtualizarActionPerformed(evt);
+            }
+        });
 
         btnExcluir.setText("Excluir");
+        btnExcluir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnExcluirActionPerformed(evt);
+            }
+        });
 
         btnCadastrar.setText("Cadastrar");
         btnCadastrar.addActionListener(new java.awt.event.ActionListener() {
@@ -106,38 +117,35 @@ public class GerenciarQuestoes extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 495, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel6)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(comboDisciplina, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel3)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtFonte, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel4)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtAno, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel6)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(comboDisciplina, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel7)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(txtConteudo, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel5)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtGabarito, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(btnAtualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnCadastrar))))
+                        .addComponent(jLabel7)
+                        .addGap(18, 18, 18)
+                        .addComponent(txtConteudo, javax.swing.GroupLayout.PREFERRED_SIZE, 403, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(32, 32, 32)
+                        .addComponent(btnExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnAtualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnCadastrar))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel2)
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(jScrollPane2)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel3)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtFonte, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel4)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtAno)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel5)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtGabarito, javax.swing.GroupLayout.PREFERRED_SIZE, 274, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -146,28 +154,25 @@ public class GerenciarQuestoes extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel3)
-                            .addComponent(txtFonte, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel4)
-                            .addComponent(txtAno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel6)
-                            .addComponent(comboDisciplina, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel7)
-                            .addComponent(txtConteudo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(20, 20, 20)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel5)
-                            .addComponent(txtGabarito, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnAtualizar)
-                            .addComponent(btnExcluir)
-                            .addComponent(btnCadastrar)))
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(42, Short.MAX_VALUE))
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 218, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(txtFonte, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel4)
+                    .addComponent(txtAno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel5)
+                    .addComponent(txtGabarito, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(9, 9, 9)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel6)
+                    .addComponent(comboDisciplina, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel7)
+                    .addComponent(txtConteudo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnCadastrar)
+                    .addComponent(btnAtualizar)
+                    .addComponent(btnExcluir))
+                .addGap(13, 13, 13))
         );
 
         jLabel1.setFont(new java.awt.Font("Ubuntu", 1, 18)); // NOI18N
@@ -223,7 +228,7 @@ public class GerenciarQuestoes extends javax.swing.JFrame {
                 .addGap(9, 9, 9)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 332, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 273, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -231,47 +236,117 @@ public class GerenciarQuestoes extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-    public void readJTable(){
+    public void readJTable() {
         DefaultTableModel modelo = (DefaultTableModel) Tabela.getModel();
         modelo.setNumRows(0);
         QuestaoDAO qdao = new QuestaoDAO();
-        
-        for(Questao q: qdao.read()){
+
+        for (Questao q : qdao.read()) {
             modelo.addRow(new Object[]{
-                q.getId(),q.getDisciplina(),q.getConteudo(),q.getEnunciado(),q.getFonte(),q.getAno(),q.getGabarito()
+                q.getId(), q.getDisciplina(), q.getConteudo(), q.getEnunciado(), q.getFonte(), q.getAno(), q.getGabarito()
             });
         }
-        
+
     }
     private void comboDisciplinaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboDisciplinaActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_comboDisciplinaActionPerformed
 
     private void TabelaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TabelaMouseClicked
-       if(Tabela.getSelectedRow()!=-1){
-           txtEnunciado.setText(Tabela.getValueAt(Tabela.getSelectedRow(), 3).toString());
-           txtFonte.setText(Tabela.getValueAt(Tabela.getSelectedRow(), 4).toString());
-           txtAno.setText(Tabela.getValueAt(Tabela.getSelectedRow(), 5).toString());
-           txtConteudo.setText(Tabela.getValueAt(Tabela.getSelectedRow(), 2).toString());
-           txtGabarito.setText(Tabela.getValueAt(Tabela.getSelectedRow(), 6).toString());
-           comboDisciplina.setSelectedItem(Tabela.getValueAt(Tabela.getSelectedRow(), 1));
-       }
+        if (Tabela.getSelectedRow() != -1) {
+            txtEnunciado.setText(Tabela.getValueAt(Tabela.getSelectedRow(), 3).toString());
+            txtFonte.setText(Tabela.getValueAt(Tabela.getSelectedRow(), 4).toString());
+            txtAno.setText(Tabela.getValueAt(Tabela.getSelectedRow(), 5).toString());
+            txtConteudo.setText(Tabela.getValueAt(Tabela.getSelectedRow(), 2).toString());
+            txtGabarito.setText(Tabela.getValueAt(Tabela.getSelectedRow(), 6).toString());
+            comboDisciplina.setSelectedItem(Tabela.getValueAt(Tabela.getSelectedRow(), 1));
+        }
     }//GEN-LAST:event_TabelaMouseClicked
 
     private void btnCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarActionPerformed
         Questao q = new Questao();
         QuestaoDAO qdao = new QuestaoDAO();
-        
-        q.setAno(Integer.parseInt(txtAno.getText()));
-        q.setConteudo(txtConteudo.getText());
-        q.setDisciplina(comboDisciplina.getSelectedItem().toString());
-        q.setEnunciado(txtEnunciado.getText());
-        q.setFonte(txtFonte.getText());
-        q.setGabarito(txtGabarito.getText());
-        
-        qdao.create(q);
-        readJTable();
+
+        try {
+            q.setAno(Integer.parseInt(txtAno.getText()));
+            q.setConteudo(txtConteudo.getText());
+            q.setDisciplina(comboDisciplina.getSelectedItem().toString());
+            q.setEnunciado(txtEnunciado.getText());
+            q.setFonte(txtFonte.getText());
+            q.setGabarito(txtGabarito.getText());
+
+            qdao.create(q);
+
+            readJTable();
+
+            txtAno.setText("");
+            txtConteudo.setText("");
+            comboDisciplina.setSelectedIndex(0);
+            txtEnunciado.setText("");
+            txtFonte.setText("");
+            txtGabarito.setText("");
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "Campos numéricos estão sendo preenchidos com texto!");
+        }
     }//GEN-LAST:event_btnCadastrarActionPerformed
+
+    private void btnAtualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtualizarActionPerformed
+        Questao q = new Questao();
+        QuestaoDAO qdao = new QuestaoDAO();
+
+        try {
+            q.setAno(Integer.parseInt(txtAno.getText()));
+            q.setConteudo(txtConteudo.getText());
+            q.setDisciplina(comboDisciplina.getSelectedItem().toString());
+            q.setEnunciado(txtEnunciado.getText());
+            q.setFonte(txtFonte.getText());
+            q.setGabarito(txtGabarito.getText());
+            q.setId((int) Tabela.getValueAt(Tabela.getSelectedRow(), 0));
+            
+            
+            qdao.update(q);
+
+            readJTable();
+
+            txtAno.setText("");
+            txtConteudo.setText("");
+            comboDisciplina.setSelectedIndex(0);
+            txtEnunciado.setText("");
+            txtFonte.setText("");
+            txtGabarito.setText("");
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "Campos numéricos estão sendo preenchidos com texto!");
+        }
+    }//GEN-LAST:event_btnAtualizarActionPerformed
+
+    private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
+        Questao q = new Questao();
+        QuestaoDAO qdao = new QuestaoDAO();
+
+        try {
+            q.setAno(Integer.parseInt(txtAno.getText()));
+            q.setConteudo(txtConteudo.getText());
+            q.setDisciplina(comboDisciplina.getSelectedItem().toString());
+            q.setEnunciado(txtEnunciado.getText());
+            q.setFonte(txtFonte.getText());
+            q.setGabarito(txtGabarito.getText());
+            q.setId((int) Tabela.getValueAt(Tabela.getSelectedRow(), 0));
+            
+            
+            qdao.delete(q);
+
+            readJTable();
+
+            txtAno.setText("");
+            txtConteudo.setText("");
+            comboDisciplina.setSelectedIndex(0);
+            txtEnunciado.setText("");
+            txtFonte.setText("");
+            txtGabarito.setText("");
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "Campos numéricos estão sendo preenchidos com texto!");
+        }
+    }//GEN-LAST:event_btnExcluirActionPerformed
 
     /**
      * @param args the command line arguments
