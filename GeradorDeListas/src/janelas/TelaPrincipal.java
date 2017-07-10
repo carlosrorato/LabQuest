@@ -18,6 +18,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
      */
     public TelaPrincipal() {
         initComponents();
+        
     }
 
     /**
@@ -126,7 +127,9 @@ public class TelaPrincipal extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
+                
                 new TelaPrincipal().setVisible(true);
+                new TelaBemVindo().setVisible(true);
             }
         });
     }
