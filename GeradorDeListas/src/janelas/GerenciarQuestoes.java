@@ -58,7 +58,6 @@ public class GerenciarQuestoes extends javax.swing.JFrame {
         Tabela = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setResizable(false);
 
         jPanel1.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
@@ -93,6 +92,11 @@ public class GerenciarQuestoes extends javax.swing.JFrame {
         btnExcluir.setText("Excluir");
 
         btnCadastrar.setText("Cadastrar");
+        btnCadastrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCadastrarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -103,7 +107,7 @@ public class GerenciarQuestoes extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 495, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 23, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel3)
@@ -186,6 +190,11 @@ public class GerenciarQuestoes extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        Tabela.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                TabelaMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(Tabela);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -204,8 +213,8 @@ public class GerenciarQuestoes extends javax.swing.JFrame {
                                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1040, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addContainerGap()
+                        .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -237,6 +246,32 @@ public class GerenciarQuestoes extends javax.swing.JFrame {
     private void comboDisciplinaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboDisciplinaActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_comboDisciplinaActionPerformed
+
+    private void TabelaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TabelaMouseClicked
+       if(Tabela.getSelectedRow()!=-1){
+           txtEnunciado.setText(Tabela.getValueAt(Tabela.getSelectedRow(), 3).toString());
+           txtFonte.setText(Tabela.getValueAt(Tabela.getSelectedRow(), 4).toString());
+           txtAno.setText(Tabela.getValueAt(Tabela.getSelectedRow(), 5).toString());
+           txtConteudo.setText(Tabela.getValueAt(Tabela.getSelectedRow(), 2).toString());
+           txtGabarito.setText(Tabela.getValueAt(Tabela.getSelectedRow(), 6).toString());
+           comboDisciplina.setSelectedItem(Tabela.getValueAt(Tabela.getSelectedRow(), 1));
+       }
+    }//GEN-LAST:event_TabelaMouseClicked
+
+    private void btnCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarActionPerformed
+        Questao q = new Questao();
+        QuestaoDAO qdao = new QuestaoDAO();
+        
+        q.setAno(Integer.parseInt(txtAno.getText()));
+        q.setConteudo(txtConteudo.getText());
+        q.setDisciplina(comboDisciplina.getSelectedItem().toString());
+        q.setEnunciado(txtEnunciado.getText());
+        q.setFonte(txtFonte.getText());
+        q.setGabarito(txtGabarito.getText());
+        
+        qdao.create(q);
+        readJTable();
+    }//GEN-LAST:event_btnCadastrarActionPerformed
 
     /**
      * @param args the command line arguments
