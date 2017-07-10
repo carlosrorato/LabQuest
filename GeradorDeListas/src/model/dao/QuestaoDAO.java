@@ -89,6 +89,49 @@ public class QuestaoDAO {
         
     }
     
+    public List<Questao> search(String criterio,String palavra){
+        int flag = 0;
+        Connection con = ConnectionFactory.getConnection();
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        
+        List<Questao> questoes = new ArrayList<>();
+        
+        try {
+            if(criterio.equals("Disciplina")) stmt = con.prepareStatement("SELECT * FROM Questao WHERE disciplina = ?");
+            else if(criterio.equals("Conteudo")) stmt = con.prepareStatement("SELECT * FROM Questao WHERE conteudo = ?");
+            else if(criterio.equals("Fonte")) stmt = con.prepareStatement("SELECT * FROM Questao WHERE fonte = ?");         
+            
+            stmt.setString(1, palavra);
+            rs = stmt.executeQuery();
+            
+            while(rs.next()){
+                
+                Questao q = new Questao();
+                
+                q.setAno(rs.getInt("ano"));
+                q.setId(rs.getInt("id"));
+                q.setConteudo(rs.getString("conteudo"));
+                q.setDisciplina(rs.getString("disciplina"));
+                q.setEnunciado(rs.getString("enunciado"));
+                q.setFonte(rs.getString("fonte"));
+                q.setGabarito(rs.getString("gabarito"));
+                
+                
+                questoes.add(q);
+                
+            }
+            
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null,"Erro ao adicionar usuario na lista: "+ex);
+        }finally{
+            ConnectionFactory.closeConnection(con, stmt, rs);
+        }
+        
+        return questoes;
+        
+    }
+    
     
     public void update(Questao q){
         
