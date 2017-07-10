@@ -47,6 +47,11 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jMenu1.setText("Questões");
 
         jMenuItem1.setText("Gerenciar Questões");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
         jMenu1.add(jMenuItem1);
 
         jMenuBar1.add(jMenu1);
@@ -96,6 +101,10 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
         JOptionPane.showMessageDialog(this, "Gerador de Provas e Listas\n\nDesenvolvido por Carlos Henrique Rorato Souza\n\nUso vetado para fins comerciais\nContato: carlosrorato@hotmail.com\n2017");
     }//GEN-LAST:event_jMenuItem4ActionPerformed
+
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        new GerenciarQuestoes().setVisible(true);
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     /**
      * @param args the command line arguments
