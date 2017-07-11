@@ -4,6 +4,7 @@ package model.bean;
 public class Questao {
     private int id;
     private int ano;
+    private int dificuldade;
     private String disciplina;
     private String conteudo;
     private String enunciado;
