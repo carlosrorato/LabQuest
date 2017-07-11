@@ -6,10 +6,12 @@
 package janelas;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -78,10 +80,10 @@ public class CriadorDeListas extends javax.swing.JFrame {
         Tabela2 = new javax.swing.JTable();
         jLabel6 = new javax.swing.JLabel();
         jPanel5 = new javax.swing.JPanel();
-        jCheckBox1 = new javax.swing.JCheckBox();
-        jCheckBox2 = new javax.swing.JCheckBox();
-        jCheckBox4 = new javax.swing.JCheckBox();
-        jTextField3 = new javax.swing.JTextField();
+        mostrarAno = new javax.swing.JCheckBox();
+        mostrarFonte = new javax.swing.JCheckBox();
+        mostrarGabarito = new javax.swing.JCheckBox();
+        txtDiretorio = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
         jButton6 = new javax.swing.JButton();
         jPanel6 = new javax.swing.JPanel();
@@ -90,8 +92,10 @@ public class CriadorDeListas extends javax.swing.JFrame {
         jLabel10 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
-        jComboBox2 = new javax.swing.JComboBox<>();
+        comboFormato = new javax.swing.JComboBox<>();
         jButton7 = new javax.swing.JButton();
+        jLabel12 = new javax.swing.JLabel();
+        txtNomeArquivo = new javax.swing.JTextField();
         btnSelect = new javax.swing.JButton();
         btnDelete = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
@@ -282,8 +286,8 @@ public class CriadorDeListas extends javax.swing.JFrame {
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jScrollPane3)
+                .addContainerGap())
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -298,26 +302,31 @@ public class CriadorDeListas extends javax.swing.JFrame {
 
         jPanel5.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        jCheckBox1.setText("Mostrar Ano");
-        jCheckBox1.addActionListener(new java.awt.event.ActionListener() {
+        mostrarAno.setText("Mostrar Ano");
+        mostrarAno.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCheckBox1ActionPerformed(evt);
+                mostrarAnoActionPerformed(evt);
             }
         });
 
-        jCheckBox2.setText("Mostrar Fonte/Instituição");
+        mostrarFonte.setText("Mostrar Fonte/Instituição");
 
-        jCheckBox4.setText("Mostrar Gabarito");
-        jCheckBox4.setToolTipText("");
-        jCheckBox4.addActionListener(new java.awt.event.ActionListener() {
+        mostrarGabarito.setText("Mostrar Gabarito");
+        mostrarGabarito.setToolTipText("");
+        mostrarGabarito.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCheckBox4ActionPerformed(evt);
+                mostrarGabaritoActionPerformed(evt);
             }
         });
 
         jLabel9.setText("Diretório :");
 
         jButton6.setText("Buscar");
+        jButton6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton6ActionPerformed(evt);
+            }
+        });
 
         jPanel6.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
@@ -369,9 +378,9 @@ public class CriadorDeListas extends javax.swing.JFrame {
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addGap(21, 21, 21)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jCheckBox1)
-                    .addComponent(jCheckBox4)
-                    .addComponent(jCheckBox2))
+                    .addComponent(mostrarAno)
+                    .addComponent(mostrarGabarito)
+                    .addComponent(mostrarFonte))
                 .addGap(18, 18, 18)
                 .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
@@ -379,7 +388,7 @@ public class CriadorDeListas extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jLabel9)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField3)
+                .addComponent(txtDiretorio)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jButton6)
                 .addGap(6, 6, 6))
@@ -390,18 +399,18 @@ public class CriadorDeListas extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addComponent(jCheckBox1)
+                        .addComponent(mostrarAno)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jCheckBox4)
+                        .addComponent(mostrarGabarito)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jCheckBox2))
+                        .addComponent(mostrarFonte))
                     .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel9)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtDiretorio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton6))
-                .addContainerGap(23, Short.MAX_VALUE))
+                .addContainerGap(17, Short.MAX_VALUE))
         );
 
         jLabel7.setFont(new java.awt.Font("Ubuntu", 1, 15)); // NOI18N
@@ -409,33 +418,47 @@ public class CriadorDeListas extends javax.swing.JFrame {
 
         jLabel8.setText("Formato:");
 
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { ".pdf", ".doc", ".odt" }));
+        comboFormato.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { ".pdf", ".doc", ".odt", ".txt" }));
 
         jButton7.setText("Gerar");
+        jButton7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton7ActionPerformed(evt);
+            }
+        });
+
+        jLabel12.setText("Nome do arquivo:");
+
+        txtNomeArquivo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtNomeArquivoActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addContainerGap()
+                    .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel5, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jPanel4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel3)
-                                    .addComponent(jLabel6)
-                                    .addComponent(jLabel7))
-                                .addGap(0, 0, Short.MAX_VALUE))))
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel6)
+                            .addComponent(jLabel7))
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(203, 203, 203)
+                        .addComponent(jLabel12)
+                        .addGap(3, 3, 3)
+                        .addComponent(txtNomeArquivo, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jLabel8)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(comboFormato, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
@@ -455,11 +478,13 @@ public class CriadorDeListas extends javax.swing.JFrame {
                 .addComponent(jLabel7)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8)
-                    .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton7))
+                    .addComponent(comboFormato, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton7)
+                    .addComponent(jLabel12)
+                    .addComponent(txtNomeArquivo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -491,9 +516,9 @@ public class CriadorDeListas extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnSelect, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(12, 12, 12)
+                .addGap(18, 18, 18)
                 .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+                .addGap(6, 6, 6))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel4)
@@ -512,12 +537,10 @@ public class CriadorDeListas extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(btnDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addContainerGap())))
         );
 
@@ -538,7 +561,7 @@ public class CriadorDeListas extends javax.swing.JFrame {
 
     public void readJTable(String criterio, String palavra) {
         DefaultTableModel modelo = (DefaultTableModel) Tabela1.getModel();
-        
+
         modelo.setNumRows(0);
         QuestaoDAO qdao = new QuestaoDAO();
 
@@ -572,21 +595,21 @@ public class CriadorDeListas extends javax.swing.JFrame {
 
             isr.close();
             bf.close();
-            JOptionPane.showMessageDialog(null,"Carregado com sucesso!");
+            JOptionPane.showMessageDialog(null, "Carregado com sucesso!");
         } catch (FileNotFoundException ex) {
-            JOptionPane.showMessageDialog(null,ex);
+            JOptionPane.showMessageDialog(null, ex);
         } catch (IOException ex) {
-            JOptionPane.showMessageDialog(null,ex);
+            JOptionPane.showMessageDialog(null, ex);
         }
 
     }
-    private void jCheckBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox1ActionPerformed
+    private void mostrarAnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mostrarAnoActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jCheckBox1ActionPerformed
+    }//GEN-LAST:event_mostrarAnoActionPerformed
 
-    private void jCheckBox4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox4ActionPerformed
+    private void mostrarGabaritoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mostrarGabaritoActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jCheckBox4ActionPerformed
+    }//GEN-LAST:event_mostrarGabaritoActionPerformed
 
     private void Tabela1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Tabela1MouseClicked
         if (Tabela1.getSelectedRow() != -1) {
@@ -644,6 +667,47 @@ public class CriadorDeListas extends javax.swing.JFrame {
     private void btnGabMeioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGabMeioActionPerformed
         btnGabFinal.setSelected(false);
     }//GEN-LAST:event_btnGabMeioActionPerformed
+
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+        JFileChooser fc = new JFileChooser();
+        fc.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+
+        if (fc.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
+            txtDiretorio.setText(fc.getSelectedFile().getPath());
+        } else {
+            JOptionPane.showMessageDialog(fc, "Escolha um local!");
+            return;
+        }
+
+    }//GEN-LAST:event_jButton6ActionPerformed
+
+    private void txtNomeArquivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNomeArquivoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtNomeArquivoActionPerformed
+
+    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
+        DefaultTableModel modelo = (DefaultTableModel) Tabela2.getModel();
+        String caminho = txtDiretorio.getText() + "/" + txtNomeArquivo.getText() + comboFormato.getSelectedItem().toString();
+        File arquivo = new File(caminho);
+        String content = null;
+        String gabarito = "";
+        int i = 0;
+
+        content = txtCabecalho.getText() + "\n" + txtTitulo.getText() + "\n\n\n";
+        while (i < Tabela2.getRowCount()) {
+            content += "Questão " + modelo.getValueAt(i, 0).toString() + " - ";
+            if(mostrarFonte.isSelected()) content += modelo.getValueAt(i, 1).toString()+" ";
+            if(mostrarAno.isSelected()) content += modelo.getValueAt(i, 2).toString()+ ". ";
+            content += modelo.getValueAt(i, 3).toString() + "\n\n";
+            if(mostrarGabarito.isSelected() && btnGabMeio.isSelected()) content += "Resposta: " + modelo.getValueAt(i, 4).toString()+"\n\n";
+            else if(mostrarGabarito.isSelected() && btnGabFinal.isSelected()) gabarito += "Questão "+modelo.getValueAt(i, 0).toString()+" - "+ modelo.getValueAt(i, 4).toString()+" ";
+            
+            i++;
+        }
+        if(mostrarGabarito.isSelected() && btnGabFinal.isSelected()) content += "\nGabarito:\n"+gabarito;
+        SalvarArquivo(content, arquivo);
+
+    }//GEN-LAST:event_jButton7ActionPerformed
     private static void SalvarArquivo(String entrada, File saida) {
         try {
             OutputStream os = new FileOutputStream(saida);
@@ -651,18 +715,48 @@ public class CriadorDeListas extends javax.swing.JFrame {
 
             osw.write(entrada);
 
-            JOptionPane.showMessageDialog(null,"Salvo com sucesso!");
+            JOptionPane.showMessageDialog(null, "Salvo com sucesso!");
 
             osw.close();
 
         } catch (FileNotFoundException ex) {
-            JOptionPane.showMessageDialog(null,ex);
+            JOptionPane.showMessageDialog(null, ex);
         } catch (IOException ex) {
-            JOptionPane.showMessageDialog(null,ex);
+            JOptionPane.showMessageDialog(null, ex);
         }
 
     }
 
+    /*private void CriarArquivo(String arquivo) throws IOException {
+        DefaultTableModel modelo = (DefaultTableModel) Tabela2.getModel();
+        OutputStream f = new FileOutputStream(arquivo);
+        OutputStreamWriter b = new OutputStreamWriter(f);
+        String gabaritoFinal = null;
+        int i = 0;
+        //colocar o cabeçalho e título
+        b.write(txtCabecalho.getText() + "\n\n");
+        b.write(txtTitulo.getText() + "\n\n");
+        while (i < Tabela2.getRowCount()) {
+            b.write("Questão " + Tabela2.getComponentAt(i, 0).toString() + " - ");
+            if (this.fonte == true) {
+                b.write(Tabela2.getComponentAt(i, 1).toString() + " ");
+            }
+            if (this.ano == true) {
+                b.write(Tabela2.getComponentAt(i, 2).toString() + " ");
+            }
+            b.write("Questão " + Tabela2.getComponentAt(i, 3).toString() + "\n\n");
+            if (gabC == true) {
+                b.write("Questão " + Tabela2.getComponentAt(i, 4).toString());
+            }
+            if (gabF == true) {
+                gabaritoFinal = gabaritoFinal + " Questão " + Tabela2.getComponentAt(0, 0).toString() + " - " + Tabela2.getComponentAt(i, 4).toString();
+            }
+            i++;
+        }
+        if (gabF == true) {
+            b.write(gabaritoFinal);
+        }
+    }*/
     /**
      * @param args the command line arguments
      */
@@ -706,18 +800,16 @@ public class CriadorDeListas extends javax.swing.JFrame {
     private javax.swing.JRadioButton btnGabMeio;
     private javax.swing.JButton btnPesquisa;
     private javax.swing.JButton btnSelect;
+    private javax.swing.JComboBox<String> comboFormato;
     private javax.swing.JComboBox<String> comboPesquisa;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton7;
-    private javax.swing.JCheckBox jCheckBox1;
-    private javax.swing.JCheckBox jCheckBox2;
-    private javax.swing.JCheckBox jCheckBox4;
-    private javax.swing.JComboBox<String> jComboBox2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -737,9 +829,13 @@ public class CriadorDeListas extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
-    private javax.swing.JTextField jTextField3;
+    private javax.swing.JCheckBox mostrarAno;
+    private javax.swing.JCheckBox mostrarFonte;
+    private javax.swing.JCheckBox mostrarGabarito;
     private javax.swing.JTextArea txtCabecalho;
+    private javax.swing.JTextField txtDiretorio;
     private javax.swing.JTextArea txtEnunciado;
+    private javax.swing.JTextField txtNomeArquivo;
     private javax.swing.JTextField txtPesquisa;
     private javax.swing.JTextField txtTitulo;
     // End of variables declaration//GEN-END:variables
