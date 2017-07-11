@@ -27,6 +27,14 @@ public class Questao {
         this.ano = ano;
     }
 
+    public int getDificuldade() {
+        return dificuldade;
+    }
+
+    public void setDificuldade(int dificuldade) {
+        this.dificuldade = dificuldade;
+    }
+
     public String getDisciplina() {
         return disciplina;
     }
