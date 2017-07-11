@@ -27,13 +27,14 @@ public class QuestaoDAO {
         
         
         try {
-            stmt = con.prepareStatement("INSERT INTO Questao (ano,disciplina,conteudo,enunciado,fonte,gabarito)VALUES(?,?,?,?,?,?)");
+            stmt = con.prepareStatement("INSERT INTO Questao (ano,dificuldade,disciplina,conteudo,enunciado,fonte,gabarito)VALUES(?,?,?,?,?,?)");
             stmt.setInt(1, q.getAno());
-            stmt.setString(2, q.getDisciplina());
-            stmt.setString(3, q.getConteudo());
-            stmt.setString(4, q.getEnunciado());
-            stmt.setString(5, q.getFonte());
-            stmt.setString(6, q.getGabarito());
+            stmt.setInt(2, q.getDificuldade());
+            stmt.setString(3, q.getDisciplina());
+            stmt.setString(4, q.getConteudo());
+            stmt.setString(5, q.getEnunciado());
+            stmt.setString(6, q.getFonte());
+            stmt.setString(7, q.getGabarito());
             
             
             stmt.executeUpdate(); 
@@ -68,6 +69,7 @@ public class QuestaoDAO {
                 
                 q.setAno(rs.getInt("ano"));
                 q.setId(rs.getInt("id"));
+                q.setDificuldade(rs.getInt("dificuldade"));
                 q.setConteudo(rs.getString("conteudo"));
                 q.setDisciplina(rs.getString("disciplina"));
                 q.setEnunciado(rs.getString("enunciado"));
@@ -99,7 +101,7 @@ public class QuestaoDAO {
         
         try {
             if(criterio.equals("Disciplina")) stmt = con.prepareStatement("SELECT * FROM Questao WHERE disciplina = ?");
-            else if(criterio.equals("Conteudo")) stmt = con.prepareStatement("SELECT * FROM Questao WHERE conteudo = ?");
+            else if(criterio.equals("Conteúdo")) stmt = con.prepareStatement("SELECT * FROM Questao WHERE conteudo = ?");
             else if(criterio.equals("Fonte")) stmt = con.prepareStatement("SELECT * FROM Questao WHERE fonte = ?");         
             
             stmt.setString(1, palavra);
