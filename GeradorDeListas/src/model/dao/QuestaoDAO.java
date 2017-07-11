@@ -27,7 +27,7 @@ public class QuestaoDAO {
         
         
         try {
-            stmt = con.prepareStatement("INSERT INTO Questao (ano,dificuldade,disciplina,conteudo,enunciado,fonte,gabarito)VALUES(?,?,?,?,?,?)");
+            stmt = con.prepareStatement("INSERT INTO Questao (ano,dificuldade,disciplina,conteudo,enunciado,fonte,gabarito)VALUES(?,?,?,?,?,?,?)");
             stmt.setInt(1, q.getAno());
             stmt.setInt(2, q.getDificuldade());
             stmt.setString(3, q.getDisciplina());

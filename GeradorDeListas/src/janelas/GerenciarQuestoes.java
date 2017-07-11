@@ -54,6 +54,8 @@ public class GerenciarQuestoes extends javax.swing.JFrame {
         btnAtualizar = new javax.swing.JButton();
         btnExcluir = new javax.swing.JButton();
         btnCadastrar = new javax.swing.JButton();
+        jLabel8 = new javax.swing.JLabel();
+        spinnerDif = new javax.swing.JSpinner();
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         Tabela = new javax.swing.JTable();
@@ -109,6 +111,10 @@ public class GerenciarQuestoes extends javax.swing.JFrame {
             }
         });
 
+        jLabel8.setText("Dificuldade:");
+
+        spinnerDif.setModel(new javax.swing.SpinnerNumberModel(0, 0, 10, 1));
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -120,7 +126,7 @@ public class GerenciarQuestoes extends javax.swing.JFrame {
                         .addComponent(jLabel6)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(comboDisciplina, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
                         .addComponent(jLabel7)
                         .addGap(18, 18, 18)
                         .addComponent(txtConteudo, javax.swing.GroupLayout.PREFERRED_SIZE, 403, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -137,15 +143,19 @@ public class GerenciarQuestoes extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtFonte, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
+                        .addComponent(txtFonte)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel4)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtAno)
+                        .addComponent(txtAno, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel8)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(spinnerDif, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel5)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtGabarito, javax.swing.GroupLayout.PREFERRED_SIZE, 274, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(txtGabarito, javax.swing.GroupLayout.PREFERRED_SIZE, 235, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -162,7 +172,9 @@ public class GerenciarQuestoes extends javax.swing.JFrame {
                     .addComponent(jLabel4)
                     .addComponent(txtAno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel5)
-                    .addComponent(txtGabarito, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtGabarito, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel8)
+                    .addComponent(spinnerDif, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(9, 9, 9)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
@@ -184,11 +196,11 @@ public class GerenciarQuestoes extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Id", "Disciplina", "Conteúdo", "Enunciado", "Fonte", "Ano", "Gabarito"
+                "Id", "Disciplina", "Conteúdo", "Enunciado", "Fonte", "Ano", "Dificuldade", "Gabarito"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false
+                false, false, false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -243,7 +255,7 @@ public class GerenciarQuestoes extends javax.swing.JFrame {
 
         for (Questao q : qdao.read()) {
             modelo.addRow(new Object[]{
-                q.getId(), q.getDisciplina(), q.getConteudo(), q.getEnunciado(), q.getFonte(), q.getAno(), q.getGabarito()
+                q.getId(), q.getDisciplina(), q.getConteudo(), q.getEnunciado(), q.getFonte(), q.getAno(),q.getDificuldade(), q.getGabarito()
             });
         }
 
@@ -258,8 +270,9 @@ public class GerenciarQuestoes extends javax.swing.JFrame {
             txtFonte.setText(Tabela.getValueAt(Tabela.getSelectedRow(), 4).toString());
             txtAno.setText(Tabela.getValueAt(Tabela.getSelectedRow(), 5).toString());
             txtConteudo.setText(Tabela.getValueAt(Tabela.getSelectedRow(), 2).toString());
-            txtGabarito.setText(Tabela.getValueAt(Tabela.getSelectedRow(), 6).toString());
+            txtGabarito.setText(Tabela.getValueAt(Tabela.getSelectedRow(), 7).toString());
             comboDisciplina.setSelectedItem(Tabela.getValueAt(Tabela.getSelectedRow(), 1));
+            spinnerDif.setValue(Tabela.getValueAt(Tabela.getSelectedRow(), 6));
         }
     }//GEN-LAST:event_TabelaMouseClicked
 
@@ -274,7 +287,8 @@ public class GerenciarQuestoes extends javax.swing.JFrame {
             q.setEnunciado(txtEnunciado.getText());
             q.setFonte(txtFonte.getText());
             q.setGabarito(txtGabarito.getText());
-
+            q.setDificuldade((int) spinnerDif.getValue());
+            
             qdao.create(q);
 
             readJTable();
@@ -285,6 +299,7 @@ public class GerenciarQuestoes extends javax.swing.JFrame {
             txtEnunciado.setText("");
             txtFonte.setText("");
             txtGabarito.setText("");
+            spinnerDif.setValue(0);
         } catch (NumberFormatException e) {
             JOptionPane.showMessageDialog(this, "Campos numéricos estão sendo preenchidos com texto!");
         }
@@ -302,7 +317,7 @@ public class GerenciarQuestoes extends javax.swing.JFrame {
             q.setFonte(txtFonte.getText());
             q.setGabarito(txtGabarito.getText());
             q.setId((int) Tabela.getValueAt(Tabela.getSelectedRow(), 0));
-            
+            q.setDificuldade((int) spinnerDif.getValue());
             
             qdao.update(q);
 
@@ -314,6 +329,7 @@ public class GerenciarQuestoes extends javax.swing.JFrame {
             txtEnunciado.setText("");
             txtFonte.setText("");
             txtGabarito.setText("");
+            spinnerDif.setValue(0);
         } catch (NumberFormatException e) {
             JOptionPane.showMessageDialog(this, "Campos numéricos estão sendo preenchidos com texto!");
         }
@@ -331,7 +347,7 @@ public class GerenciarQuestoes extends javax.swing.JFrame {
             q.setFonte(txtFonte.getText());
             q.setGabarito(txtGabarito.getText());
             q.setId((int) Tabela.getValueAt(Tabela.getSelectedRow(), 0));
-            
+            q.setDificuldade((int) spinnerDif.getValue());
             
             qdao.delete(q);
 
@@ -343,6 +359,7 @@ public class GerenciarQuestoes extends javax.swing.JFrame {
             txtEnunciado.setText("");
             txtFonte.setText("");
             txtGabarito.setText("");
+            spinnerDif.setValue(0);
         } catch (NumberFormatException e) {
             JOptionPane.showMessageDialog(this, "Campos numéricos estão sendo preenchidos com texto!");
         }
@@ -396,9 +413,11 @@ public class GerenciarQuestoes extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JSpinner spinnerDif;
     private javax.swing.JTextField txtAno;
     private javax.swing.JTextField txtConteudo;
     private javax.swing.JTextArea txtEnunciado;
