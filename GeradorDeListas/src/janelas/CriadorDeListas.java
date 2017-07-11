@@ -5,6 +5,20 @@
  */
 package janelas;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableRowSorter;
 import model.bean.Questao;
@@ -15,8 +29,9 @@ import model.dao.QuestaoDAO;
  * @author carlosrorato
  */
 public class CriadorDeListas extends javax.swing.JFrame {
-    
+
     private int numero = 1;
+
     /**
      * Creates new form CriadorDeListas
      */
@@ -51,9 +66,9 @@ public class CriadorDeListas extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
+        txtTitulo = new javax.swing.JTextField();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
+        txtCabecalho = new javax.swing.JTextArea();
         jLabel5 = new javax.swing.JLabel();
         jButton4 = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
@@ -179,9 +194,9 @@ public class CriadorDeListas extends javax.swing.JFrame {
 
         jLabel2.setText("Título:");
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jScrollPane2.setViewportView(jTextArea1);
+        txtCabecalho.setColumns(20);
+        txtCabecalho.setRows(5);
+        jScrollPane2.setViewportView(txtCabecalho);
 
         jLabel5.setText("Cabeçalho:");
 
@@ -193,6 +208,11 @@ public class CriadorDeListas extends javax.swing.JFrame {
         });
 
         jButton5.setText("Salvar");
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -204,7 +224,7 @@ public class CriadorDeListas extends javax.swing.JFrame {
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addComponent(jLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextField2))
+                        .addComponent(txtTitulo))
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addComponent(jLabel5)
@@ -222,7 +242,7 @@ public class CriadorDeListas extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel5)
                 .addGap(4, 4, 4)
@@ -248,7 +268,7 @@ public class CriadorDeListas extends javax.swing.JFrame {
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false
+                true, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -280,9 +300,9 @@ public class CriadorDeListas extends javax.swing.JFrame {
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 414, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton8)
-                    .addComponent(jButton9))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jButton8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButton9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -545,9 +565,36 @@ public class CriadorDeListas extends javax.swing.JFrame {
 
     }
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        // TODO add your handling code here:
+        JFileChooser fc = new JFileChooser();
+        File arquivo;
+        if (fc.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
+            arquivo = fc.getSelectedFile();
+        } else {
+            JOptionPane.showMessageDialog(fc, "Escolha um arquivo para carregar!");
+            return;
+        }
+        leituraArquivoLinha(arquivo);
     }//GEN-LAST:event_jButton4ActionPerformed
+    private void leituraArquivoLinha(File entrada) {
+        try {
+            InputStream is = new FileInputStream(entrada);
+            InputStreamReader isr = new InputStreamReader(is);
+            BufferedReader bf = new BufferedReader(isr);
 
+            while (bf.ready()) {
+                txtCabecalho.append(bf.readLine() + "\n");
+            }
+
+            isr.close();
+            bf.close();
+            JOptionPane.showMessageDialog(null,"Carregado com sucesso!");
+        } catch (FileNotFoundException ex) {
+            JOptionPane.showMessageDialog(null,ex);
+        } catch (IOException ex) {
+            JOptionPane.showMessageDialog(null,ex);
+        }
+
+    }
     private void jCheckBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jCheckBox1ActionPerformed
@@ -582,7 +629,7 @@ public class CriadorDeListas extends javax.swing.JFrame {
         DefaultTableModel modelo = (DefaultTableModel) Tabela2.getModel();
         if (Tabela1.getSelectedRow() != -1) {
             modelo.addRow(new Object[]{
-                this.numero, 
+                this.numero,
                 Tabela1.getValueAt(Tabela1.getSelectedRow(), 4),
                 Tabela1.getValueAt(Tabela1.getSelectedRow(), 5),
                 Tabela1.getValueAt(Tabela1.getSelectedRow(), 3),
@@ -598,6 +645,38 @@ public class CriadorDeListas extends javax.swing.JFrame {
             modelo.removeRow(Tabela2.getSelectedRow());
         }
     }//GEN-LAST:event_btnDeleteActionPerformed
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        JFileChooser fc = new JFileChooser();
+        File arquivo;
+
+        if (fc.showSaveDialog(null) == JFileChooser.APPROVE_OPTION) {
+            arquivo = fc.getSelectedFile();
+        } else {
+            JOptionPane.showMessageDialog(fc, "Escolha um nome de arquivo!");
+            return;
+        }
+        SalvarArquivo(txtCabecalho.getText(), arquivo);
+
+    }//GEN-LAST:event_jButton5ActionPerformed
+    private static void SalvarArquivo(String entrada, File saida) {
+        try {
+            OutputStream os = new FileOutputStream(saida);
+            OutputStreamWriter osw = new OutputStreamWriter(os);
+
+            osw.write(entrada);
+
+            JOptionPane.showMessageDialog(null,"Salvo com sucesso!");
+
+            osw.close();
+
+        } catch (FileNotFoundException ex) {
+            JOptionPane.showMessageDialog(null,ex);
+        } catch (IOException ex) {
+            JOptionPane.showMessageDialog(null,ex);
+        }
+
+    }
 
     /**
      * @param args the command line arguments
@@ -675,10 +754,10 @@ public class CriadorDeListas extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
-    private javax.swing.JTextArea jTextArea1;
-    private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;
+    private javax.swing.JTextArea txtCabecalho;
     private javax.swing.JTextArea txtEnunciado;
     private javax.swing.JTextField txtPesquisa;
+    private javax.swing.JTextField txtTitulo;
     // End of variables declaration//GEN-END:variables
 }
