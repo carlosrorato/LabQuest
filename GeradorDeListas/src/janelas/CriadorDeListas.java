@@ -76,8 +76,6 @@ public class CriadorDeListas extends javax.swing.JFrame {
         jPanel4 = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
         Tabela2 = new javax.swing.JTable();
-        jButton8 = new javax.swing.JButton();
-        jButton9 = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
         jPanel5 = new javax.swing.JPanel();
         jCheckBox1 = new javax.swing.JCheckBox();
@@ -87,8 +85,8 @@ public class CriadorDeListas extends javax.swing.JFrame {
         jLabel9 = new javax.swing.JLabel();
         jButton6 = new javax.swing.JButton();
         jPanel6 = new javax.swing.JPanel();
-        jRadioButton1 = new javax.swing.JRadioButton();
-        jRadioButton2 = new javax.swing.JRadioButton();
+        btnGabFinal = new javax.swing.JRadioButton();
+        btnGabMeio = new javax.swing.JRadioButton();
         jLabel10 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
@@ -259,6 +257,7 @@ public class CriadorDeListas extends javax.swing.JFrame {
 
         jPanel4.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
+        Tabela2.setAutoCreateRowSorter(true);
         Tabela2.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -277,45 +276,20 @@ public class CriadorDeListas extends javax.swing.JFrame {
         });
         jScrollPane3.setViewportView(Tabela2);
 
-        jButton8.setText("^");
-        jButton8.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton8ActionPerformed(evt);
-            }
-        });
-
-        jButton9.setText("v");
-        jButton9.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton9ActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 414, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 222, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addGap(77, 77, 77)
-                        .addComponent(jButton8)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton9)))
+                .addContainerGap()
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 222, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -347,9 +321,19 @@ public class CriadorDeListas extends javax.swing.JFrame {
 
         jPanel6.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        jRadioButton1.setText("Ao final do documento");
+        btnGabFinal.setText("Ao final do documento");
+        btnGabFinal.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGabFinalActionPerformed(evt);
+            }
+        });
 
-        jRadioButton2.setText("Ao final de cada questão");
+        btnGabMeio.setText("Ao final de cada questão");
+        btnGabMeio.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGabMeioActionPerformed(evt);
+            }
+        });
 
         jLabel10.setText("Gabarito:");
 
@@ -360,8 +344,8 @@ public class CriadorDeListas extends javax.swing.JFrame {
             .addGroup(jPanel6Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jRadioButton2)
-                    .addComponent(jRadioButton1))
+                    .addComponent(btnGabMeio)
+                    .addComponent(btnGabFinal))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(jPanel6Layout.createSequentialGroup()
                 .addComponent(jLabel10)
@@ -372,9 +356,9 @@ public class CriadorDeListas extends javax.swing.JFrame {
             .addGroup(jPanel6Layout.createSequentialGroup()
                 .addComponent(jLabel10)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jRadioButton1)
+                .addComponent(btnGabFinal)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jRadioButton2)
+                .addComponent(btnGabMeio)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -554,6 +538,7 @@ public class CriadorDeListas extends javax.swing.JFrame {
 
     public void readJTable(String criterio, String palavra) {
         DefaultTableModel modelo = (DefaultTableModel) Tabela1.getModel();
+        
         modelo.setNumRows(0);
         QuestaoDAO qdao = new QuestaoDAO();
 
@@ -603,14 +588,6 @@ public class CriadorDeListas extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jCheckBox4ActionPerformed
 
-    private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton8ActionPerformed
-
-    private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton9ActionPerformed
-
     private void Tabela1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Tabela1MouseClicked
         if (Tabela1.getSelectedRow() != -1) {
             txtEnunciado.setText(Tabela1.getValueAt(Tabela1.getSelectedRow(), 3).toString());
@@ -659,6 +636,14 @@ public class CriadorDeListas extends javax.swing.JFrame {
         SalvarArquivo(txtCabecalho.getText(), arquivo);
 
     }//GEN-LAST:event_jButton5ActionPerformed
+
+    private void btnGabFinalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGabFinalActionPerformed
+        btnGabMeio.setSelected(false);
+    }//GEN-LAST:event_btnGabFinalActionPerformed
+
+    private void btnGabMeioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGabMeioActionPerformed
+        btnGabFinal.setSelected(false);
+    }//GEN-LAST:event_btnGabMeioActionPerformed
     private static void SalvarArquivo(String entrada, File saida) {
         try {
             OutputStream os = new FileOutputStream(saida);
@@ -717,6 +702,8 @@ public class CriadorDeListas extends javax.swing.JFrame {
     private javax.swing.JTable Tabela1;
     private javax.swing.JTable Tabela2;
     private javax.swing.JButton btnDelete;
+    private javax.swing.JRadioButton btnGabFinal;
+    private javax.swing.JRadioButton btnGabMeio;
     private javax.swing.JButton btnPesquisa;
     private javax.swing.JButton btnSelect;
     private javax.swing.JComboBox<String> comboPesquisa;
@@ -724,8 +711,6 @@ public class CriadorDeListas extends javax.swing.JFrame {
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton7;
-    private javax.swing.JButton jButton8;
-    private javax.swing.JButton jButton9;
     private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JCheckBox jCheckBox2;
     private javax.swing.JCheckBox jCheckBox4;
@@ -748,8 +733,6 @@ public class CriadorDeListas extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
-    private javax.swing.JRadioButton jRadioButton1;
-    private javax.swing.JRadioButton jRadioButton2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
