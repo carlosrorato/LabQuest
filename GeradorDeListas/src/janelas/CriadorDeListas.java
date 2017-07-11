@@ -5,6 +5,11 @@
  */
 package janelas;
 
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableRowSorter;
+import model.bean.Questao;
+import model.dao.QuestaoDAO;
+
 /**
  *
  * @author carlosrorato
@@ -16,8 +21,11 @@ public class CriadorDeListas extends javax.swing.JFrame {
      */
     public CriadorDeListas() {
         initComponents();
-    }
+        DefaultTableModel modelo = (DefaultTableModel) Tabela1.getModel();
+        Tabela1.setRowSorter(new TableRowSorter(modelo));
 
+        readJTable();
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -102,6 +110,11 @@ public class CriadorDeListas extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        Tabela1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                Tabela1MouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(Tabela1);
 
         txtEnunciado.setEditable(false);
@@ -145,7 +158,7 @@ public class CriadorDeListas extends javax.swing.JFrame {
                     .addComponent(txtPesquisa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnPesquisa))
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 560, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 524, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel11)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -489,7 +502,30 @@ public class CriadorDeListas extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+    public void readJTable() {
+        DefaultTableModel modelo = (DefaultTableModel) Tabela1.getModel();
+        modelo.setNumRows(0);
+        QuestaoDAO qdao = new QuestaoDAO();
 
+        for (Questao q : qdao.read()) {
+            modelo.addRow(new Object[]{
+                q.getId(), q.getDisciplina(), q.getConteudo(), q.getEnunciado(), q.getFonte(), q.getAno(),q.getDificuldade(), q.getGabarito()
+            });
+        }
+
+    }
+    public void readJTable(String criterio, String palavra) {
+        DefaultTableModel modelo = (DefaultTableModel) Tabela1.getModel();
+        modelo.setNumRows(0);
+        QuestaoDAO qdao = new QuestaoDAO();
+
+        for (Questao q : qdao.search(criterio,palavra)) {
+            modelo.addRow(new Object[]{
+                q.getId(), q.getDisciplina(), q.getConteudo(), q.getEnunciado(), q.getFonte(), q.getAno(),q.getDificuldade(), q.getGabarito()
+            });
+        }
+
+    }
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton4ActionPerformed
@@ -509,6 +545,12 @@ public class CriadorDeListas extends javax.swing.JFrame {
     private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton9ActionPerformed
+
+    private void Tabela1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Tabela1MouseClicked
+        if (Tabela1.getSelectedRow() != -1) {
+            txtEnunciado.setText(Tabela1.getValueAt(Tabela1.getSelectedRow(), 3).toString());
+        }
+    }//GEN-LAST:event_Tabela1MouseClicked
 
     /**
      * @param args the command line arguments
