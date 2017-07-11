@@ -143,14 +143,15 @@ public class QuestaoDAO {
         
         try {
             
-            stmt = con.prepareStatement("UPDATE Questao SET ano = ?,disciplina = ?,conteudo = ?,enunciado = ?,fonte = ?,gabarito = ? WHERE id = ?");
+            stmt = con.prepareStatement("UPDATE Questao SET ano = ?,dificuldade = ?,disciplina = ?,conteudo = ?,enunciado = ?,fonte = ?,gabarito = ? WHERE id = ?");
             stmt.setInt(1, q.getAno());
-            stmt.setString(2, q.getDisciplina());
-            stmt.setString(3, q.getConteudo());
-            stmt.setString(4, q.getEnunciado());
-            stmt.setString(5, q.getFonte());
-            stmt.setString(6, q.getGabarito());
-            stmt.setInt(7, q.getId());
+            stmt.setInt(2, q.getDificuldade());
+            stmt.setString(3, q.getDisciplina());
+            stmt.setString(4, q.getConteudo());
+            stmt.setString(5, q.getEnunciado());
+            stmt.setString(6, q.getFonte());
+            stmt.setString(7, q.getGabarito());
+            stmt.setInt(8, q.getId());
             
             
             
