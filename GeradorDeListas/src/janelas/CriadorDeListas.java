@@ -26,6 +26,7 @@ public class CriadorDeListas extends javax.swing.JFrame {
 
         readJTable();
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -90,6 +91,11 @@ public class CriadorDeListas extends javax.swing.JFrame {
         comboPesquisa.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Disciplina", "Conteúdo", "Fonte/Instituição" }));
 
         btnPesquisa.setText("Pesquisar");
+        btnPesquisa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPesquisaActionPerformed(evt);
+            }
+        });
 
         Tabela1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -509,19 +515,20 @@ public class CriadorDeListas extends javax.swing.JFrame {
 
         for (Questao q : qdao.read()) {
             modelo.addRow(new Object[]{
-                q.getId(), q.getDisciplina(), q.getConteudo(), q.getEnunciado(), q.getFonte(), q.getAno(),q.getDificuldade(), q.getGabarito()
+                q.getId(), q.getDisciplina(), q.getConteudo(), q.getEnunciado(), q.getFonte(), q.getAno(), q.getDificuldade(), q.getGabarito()
             });
         }
 
     }
+
     public void readJTable(String criterio, String palavra) {
         DefaultTableModel modelo = (DefaultTableModel) Tabela1.getModel();
         modelo.setNumRows(0);
         QuestaoDAO qdao = new QuestaoDAO();
 
-        for (Questao q : qdao.search(criterio,palavra)) {
+        for (Questao q : qdao.search(criterio, palavra)) {
             modelo.addRow(new Object[]{
-                q.getId(), q.getDisciplina(), q.getConteudo(), q.getEnunciado(), q.getFonte(), q.getAno(),q.getDificuldade(), q.getGabarito()
+                q.getId(), q.getDisciplina(), q.getConteudo(), q.getEnunciado(), q.getFonte(), q.getAno(), q.getDificuldade(), q.getGabarito()
             });
         }
 
@@ -551,6 +558,14 @@ public class CriadorDeListas extends javax.swing.JFrame {
             txtEnunciado.setText(Tabela1.getValueAt(Tabela1.getSelectedRow(), 3).toString());
         }
     }//GEN-LAST:event_Tabela1MouseClicked
+
+    private void btnPesquisaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPesquisaActionPerformed
+        if (!txtPesquisa.getText().isEmpty()) {
+            readJTable(comboPesquisa.getSelectedItem().toString(), txtPesquisa.getText());
+        } else {
+            readJTable();
+        }
+    }//GEN-LAST:event_btnPesquisaActionPerformed
 
     /**
      * @param args the command line arguments
