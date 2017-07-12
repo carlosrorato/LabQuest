@@ -5,6 +5,15 @@
  */
 package janelas;
 
+import com.itextpdf.text.BaseColor;
+import com.itextpdf.text.Document;
+import com.itextpdf.text.DocumentException;
+import com.itextpdf.text.Font.FontFamily;
+import com.itextpdf.text.FontFactory;
+import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.pdf.BaseFont;
+import com.itextpdf.text.pdf.PdfWriter;
+import java.awt.Font;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -686,26 +695,40 @@ public class CriadorDeListas extends javax.swing.JFrame {
     }//GEN-LAST:event_txtNomeArquivoActionPerformed
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
-        DefaultTableModel modelo = (DefaultTableModel) Tabela2.getModel();
-        String caminho = txtDiretorio.getText() + "/" + txtNomeArquivo.getText() + comboFormato.getSelectedItem().toString();
-        File arquivo = new File(caminho);
-        String content = null;
-        String gabarito = "";
-        int i = 0;
-
-        content = txtCabecalho.getText() + "\n" + txtTitulo.getText() + "\n\n\n";
-        while (i < Tabela2.getRowCount()) {
-            content += "Questão " + modelo.getValueAt(i, 0).toString() + " - ";
-            if(mostrarFonte.isSelected()) content += modelo.getValueAt(i, 1).toString()+" ";
-            if(mostrarAno.isSelected()) content += modelo.getValueAt(i, 2).toString()+ ". ";
-            content += modelo.getValueAt(i, 3).toString() + "\n\n";
-            if(mostrarGabarito.isSelected() && btnGabMeio.isSelected()) content += "Resposta: " + modelo.getValueAt(i, 4).toString()+"\n\n";
-            else if(mostrarGabarito.isSelected() && btnGabFinal.isSelected()) gabarito += "Questão "+modelo.getValueAt(i, 0).toString()+" - "+ modelo.getValueAt(i, 4).toString()+" ";
+        try {
+            DefaultTableModel modelo = (DefaultTableModel) Tabela2.getModel();
+            String caminho = txtDiretorio.getText() + "/" + txtNomeArquivo.getText() + comboFormato.getSelectedItem().toString();
+            File arquivo = new File(caminho);
+            String content = null;
+            String gabarito = "";
+            int i = 0;
             
-            i++;
+            content = txtCabecalho.getText() + "\n" + txtTitulo.getText() + "\n\n\n";
+            while (i < Tabela2.getRowCount()) {
+                content += "Questão " + modelo.getValueAt(i, 0).toString() + " - ";
+                if (mostrarFonte.isSelected()) {
+                    content += modelo.getValueAt(i, 1).toString() + " ";
+                }
+                if (mostrarAno.isSelected()) {
+                    content += modelo.getValueAt(i, 2).toString() + ". ";
+                }
+                content += modelo.getValueAt(i, 3).toString() + "\n\n";
+                if (mostrarGabarito.isSelected() && btnGabMeio.isSelected()) {
+                    content += "Resposta: " + modelo.getValueAt(i, 4).toString() + "\n\n";
+                } else if (mostrarGabarito.isSelected() && btnGabFinal.isSelected()) {
+                    gabarito += "Questão " + modelo.getValueAt(i, 0).toString() + " - " + modelo.getValueAt(i, 4).toString() + " ";
+                }
+                
+                i++;
+            }
+            if (mostrarGabarito.isSelected() && btnGabFinal.isSelected()) {
+                content += "\nGabarito:\n" + gabarito;
+            }
+            if(comboFormato.getSelectedItem().toString().equals(".txt")) SalvarArquivo(content, arquivo);
+            else if(comboFormato.getSelectedItem().toString().equals(".pdf")) SalvarArquivoPDF(content, arquivo);
+        } catch (IOException ex) {
+            Logger.getLogger(CriadorDeListas.class.getName()).log(Level.SEVERE, null, ex);
         }
-        if(mostrarGabarito.isSelected() && btnGabFinal.isSelected()) content += "\nGabarito:\n"+gabarito;
-        SalvarArquivo(content, arquivo);
 
     }//GEN-LAST:event_jButton7ActionPerformed
     private static void SalvarArquivo(String entrada, File saida) {
@@ -724,6 +747,25 @@ public class CriadorDeListas extends javax.swing.JFrame {
         } catch (IOException ex) {
             JOptionPane.showMessageDialog(null, ex);
         }
+
+    }
+
+    private static void SalvarArquivoPDF(String entrada, File saida) throws IOException {
+        Document doc = new Document();
+        try {
+            //Gerando o pdf com o IText  
+            PdfWriter.getInstance(doc, new FileOutputStream(saida));
+            doc.open();
+            Paragraph p = new Paragraph(entrada, FontFactory.getFont(FontFactory.TIMES_ROMAN,11, BaseColor.BLACK));
+            
+            doc.add(p);
+            JOptionPane.showMessageDialog(null, "Salvo com sucesso!");
+        } catch (DocumentException | FileNotFoundException ex) {
+
+        }finally{
+            doc.close();
+        }
+        
 
     }
 
