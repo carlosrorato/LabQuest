@@ -34,7 +34,9 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableRowSorter;
 import model.bean.Questao;
 import model.dao.QuestaoDAO;
-
+import org.apache.poi.xwpf.usermodel.XWPFDocument;
+import org.apache.poi.xwpf.usermodel.XWPFParagraph;
+import org.apache.poi.xwpf.usermodel.XWPFRun;
 /**
  *
  * @author carlosrorato
@@ -427,7 +429,7 @@ public class CriadorDeListas extends javax.swing.JFrame {
 
         jLabel8.setText("Formato:");
 
-        comboFormato.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { ".pdf", ".doc", ".odt", ".txt" }));
+        comboFormato.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { ".pdf", ".docx", ".txt" }));
 
         jButton7.setText("Gerar");
         jButton7.addActionListener(new java.awt.event.ActionListener() {
@@ -726,6 +728,7 @@ public class CriadorDeListas extends javax.swing.JFrame {
             }
             if(comboFormato.getSelectedItem().toString().equals(".txt")) SalvarArquivo(content, arquivo);
             else if(comboFormato.getSelectedItem().toString().equals(".pdf")) SalvarArquivoPDF(content, arquivo);
+            else if(comboFormato.getSelectedItem().toString().equals(".docx")) SalvarArquivoDOCX(content, arquivo);
         } catch (IOException ex) {
             Logger.getLogger(CriadorDeListas.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -768,37 +771,20 @@ public class CriadorDeListas extends javax.swing.JFrame {
         
 
     }
+    
+     private static void SalvarArquivoDOCX(String entrada, File saida) throws IOException {
+         XWPFDocument doc = new XWPFDocument();
+         XWPFParagraph par = doc.createParagraph();
+         XWPFRun run = par.createRun();
+         
+         run.setText(entrada);
+         
+         FileOutputStream out = new FileOutputStream(saida);
+         doc.write(out);
+         out.close();
 
-    /*private void CriarArquivo(String arquivo) throws IOException {
-        DefaultTableModel modelo = (DefaultTableModel) Tabela2.getModel();
-        OutputStream f = new FileOutputStream(arquivo);
-        OutputStreamWriter b = new OutputStreamWriter(f);
-        String gabaritoFinal = null;
-        int i = 0;
-        //colocar o cabeçalho e título
-        b.write(txtCabecalho.getText() + "\n\n");
-        b.write(txtTitulo.getText() + "\n\n");
-        while (i < Tabela2.getRowCount()) {
-            b.write("Questão " + Tabela2.getComponentAt(i, 0).toString() + " - ");
-            if (this.fonte == true) {
-                b.write(Tabela2.getComponentAt(i, 1).toString() + " ");
-            }
-            if (this.ano == true) {
-                b.write(Tabela2.getComponentAt(i, 2).toString() + " ");
-            }
-            b.write("Questão " + Tabela2.getComponentAt(i, 3).toString() + "\n\n");
-            if (gabC == true) {
-                b.write("Questão " + Tabela2.getComponentAt(i, 4).toString());
-            }
-            if (gabF == true) {
-                gabaritoFinal = gabaritoFinal + " Questão " + Tabela2.getComponentAt(0, 0).toString() + " - " + Tabela2.getComponentAt(i, 4).toString();
-            }
-            i++;
-        }
-        if (gabF == true) {
-            b.write(gabaritoFinal);
-        }
-    }*/
+    }
+    
     /**
      * @param args the command line arguments
      */
