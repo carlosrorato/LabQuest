@@ -25,3 +25,4 @@ hs_err_pid*
 /GeradorDeListas/build/
 /GeradorDeListas/config2.txt
 /GeradorDeListas/cabeçalho.txt
+/GeradorDeListas/dist/

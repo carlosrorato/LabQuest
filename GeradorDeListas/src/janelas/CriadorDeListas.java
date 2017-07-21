@@ -111,7 +111,8 @@ public class CriadorDeListas extends javax.swing.JFrame {
         btnDelete = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("LabQuest 1.0 - Criador de Listas e Provas");
 
         jPanel1.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
@@ -782,7 +783,7 @@ public class CriadorDeListas extends javax.swing.JFrame {
          FileOutputStream out = new FileOutputStream(saida);
          doc.write(out);
          out.close();
-
+         JOptionPane.showMessageDialog(null, "Salvo com sucesso!");
     }
     
     /**

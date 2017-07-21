@@ -24,7 +24,7 @@ public class ConnectionFactory {
     
     public static void obterDadosBD() throws IOException{
         try {
-            FileReader conf = new FileReader("config.txt");
+            FileReader conf = new FileReader("configLabQuest.txt");
             BufferedReader lerArq = new BufferedReader(conf);
             ConnectionFactory.DRIVER = lerArq.readLine();
             ConnectionFactory.URL = lerArq.readLine();

@@ -134,7 +134,6 @@ public class QuestaoDAO {
         
     }
     
-    
     public void update(Questao q){
         
         Connection con = ConnectionFactory.getConnection();
