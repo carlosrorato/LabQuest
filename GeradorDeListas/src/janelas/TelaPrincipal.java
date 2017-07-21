@@ -5,6 +5,9 @@
  */
 package janelas;
 
+import java.awt.Image;
+import java.awt.Toolkit;
+import java.net.URL;
 import javax.swing.JOptionPane;
 
 /**
@@ -19,6 +22,10 @@ public class TelaPrincipal extends javax.swing.JFrame {
     public TelaPrincipal() {
         initComponents();
         
+        //ícone
+        URL caminhoIcone = getClass().getResource("/imagens/icone.png");
+        Image icone = Toolkit.getDefaultToolkit().getImage(caminhoIcone);
+        this.setIconImage(icone);
     }
 
     /**
@@ -41,8 +48,11 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("LabQuest 1.0 - Tela Principal");
+        setExtendedState(6);
+        getContentPane().setLayout(new java.awt.GridBagLayout());
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/logomarcaLabQuest.png"))); // NOI18N
+        getContentPane().add(jLabel1, new java.awt.GridBagConstraints());
 
         jMenu1.setText("Questões");
 
@@ -82,28 +92,11 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
         setJMenuBar(jMenuBar1);
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 434, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(36, 36, 36)
-                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(33, 33, 33))
-        );
-
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
-        JOptionPane.showMessageDialog(this, "LabQuest 1.0\n\nDesenvolvido por Carlos Henrique Rorato Souza\n\nUso vetado para fins comerciais\nContato: carlosrorato@hotmail.com\n2017");
+        JOptionPane.showMessageDialog(this, "LabQuest 1.0\n\nDesenvolvido por Carlos Henrique Rorato Souza\n\nUso vetado para fins comerciais\nContato: github.com/carlinhosxxp\n2017");
     }//GEN-LAST:event_jMenuItem4ActionPerformed
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed

@@ -102,7 +102,7 @@ public class QuestaoDAO {
         try {
             if(criterio.equals("Disciplina")) stmt = con.prepareStatement("SELECT * FROM Questao WHERE disciplina = ?");
             else if(criterio.equals("Conteúdo")) stmt = con.prepareStatement("SELECT * FROM Questao WHERE conteudo = ?");
-            else if(criterio.equals("Fonte")) stmt = con.prepareStatement("SELECT * FROM Questao WHERE fonte = ?");         
+            else if(criterio.equals("Fonte/Instituição")) stmt = con.prepareStatement("SELECT * FROM Questao WHERE fonte = ?");         
             
             stmt.setString(1, palavra);
             rs = stmt.executeQuery();
@@ -118,6 +118,7 @@ public class QuestaoDAO {
                 q.setEnunciado(rs.getString("enunciado"));
                 q.setFonte(rs.getString("fonte"));
                 q.setGabarito(rs.getString("gabarito"));
+                q.setDificuldade(rs.getInt("dificuldade"));
                 
                 
                 questoes.add(q);
